@@ -1,0 +1,200 @@
+﻿@using LibraryManagementSystem.Data
+
+@{
+    ViewData["Title"] = "Home";
+    ApplicationDbContext dbContext = new ApplicationDbContext();
+    var TotalBooks = dbContext.Stock?.Count() ?? 0;
+    var LowStockBooks = dbContext.Stock?.Count(c => c.Quantity <= 2) ?? 0;
+    var TotalRevenue = dbContext.Sales?.Sum(s => s.TotalPriceOfSale) ?? 0m;
+    var TotalSales = dbContext.Sales?.Count() ?? 0;
+    var TotalCustomers = dbContext.Customers?.Count() ?? 0;
+
+    var recentSales = (dbContext.Sales ?? Enumerable.Empty<MakeSale>())
+        .OrderByDescending(s => s.SaleDate)
+        .Take(1)
+        .ToList();
+
+    var recentCustomers = (dbContext.Customers ?? Enumerable.Empty<Customer>())
+        .OrderByDescending(c => c.RegistrationDate)
+        .Take(1)
+        .ToList();
+
+    var recentBooks = (dbContext.Stock ?? Enumerable.Empty<Book>())
+        .OrderByDescending(b => b.Id) 
+        .Take(1)
+        .ToList();
+}
+<div class="p-6">
+    <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Bookstore Overview</h3>
+        <p class="text-gray-600">Welcome to your bookstore Home. Here's what's happening today.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        @* Total Books *@
+        <div class="bg-emerald-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Total Books</p>
+                    <p class="text-2xl font-bold text-emerald-700">@TotalBooks</p>
+                </div>
+                <div class="bg-emerald-500 p-3 rounded-lg shadow-sm">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        @* Total Customers *@
+        <div class="bg-blue-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Total Customers</p>
+                    <p class="text-2xl font-bold text-blue-700">@TotalCustomers</p>
+                </div>
+                <div class="bg-blue-500 p-3 rounded-lg shadow-sm">
+                    <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+
+                </div>
+            </div>
+        </div>
+        @* Total Sales *@
+        <div class="bg-orange-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Total Sales</p>
+                    <p class="text-2xl font-bold text-orange-700">@TotalSales</p>
+                </div>
+                <div class="bg-orange-500 p-3 rounded-lg shadow-sm">
+                    <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                    </svg>
+
+                </div>
+            </div>
+        </div>
+        @* Total Revenue *@
+        <div class="bg-purple-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Total Revenue</p>
+                    <p class="text-2xl font-bold text-purple-700">@TotalRevenue.ToString("C")</p>
+                </div>
+                <div class="bg-purple-500 p-3 rounded-lg shadow-sm">
+                    <svg class="w-6 h-6 text-white" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        @* Low Stock Books *@
+        <div class="bg-red-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Low Stock Books</p>
+                    <p class="text-2xl font-bold text-gray-700">@LowStockBooks</p>
+                </div>
+                <div class="bg-red-500 p-3 rounded-lg shadow-sm">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="text-lg font-semibold text-gray-900">Recent Activity</h4>
+                <svg class="w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207" />
+                </svg>
+
+            </div>
+            <div class="space-y-4">
+                <div class="space-y-4">
+                    @foreach (var sale in recentSales)
+                    {
+                        <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">
+                                    Book sold:
+                                    @{
+                                        var bookTitles = (sale.BookId != null && sale.BookId.Any())
+                                        ? string.Join(", ", dbContext.Stock.Where(b => sale.BookId.Contains(b.Id)).Select(b => b.Title))
+                                        : "Unknown";
+                                    }
+                                    "@bookTitles"
+                                </p>
+                                <p class="text-xs text-gray-500">@sale.SaleDate.ToString("g")</p>
+                            </div>
+                        </div>
+                    }
+                    @foreach (var customer in recentCustomers)
+                    {
+                        <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">
+                                    New customer registered: @customer.CustomerName
+                                </p>
+                                <p class="text-xs text-gray-500">@customer.RegistrationDate.ToString("g")</p>
+                            </div>
+                        </div>
+                    }
+                    @foreach (var book in recentBooks)
+                    {
+                        <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">
+                                    New book added: "@book.Title"
+                                </p>
+                                <p class="text-xs text-gray-500">ID: @book.Id</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h4 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h4>
+            <div class="grid grid-cols-2 gap-4">
+                <a class="btn p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors text-left group" asp-area="" asp-controller="Books" asp-action="Create">
+                    <svg class="w-8 h-8 text-emerald-600 mb-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <p class="font-medium text-gray-900">Add New Book</p>
+                    <p class="text-xs text-gray-500">Expand your collection</p>
+                </a>
+                <a class="btn p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-left group" asp-area="" asp-controller="Customers" asp-action="Create">
+                    <svg class="w-8 h-8 text-blue-600 mb-2 group-hover:scale-110 transition-transform" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                    <p class="font-medium text-gray-900">Add Customer</p>
+                    <p class="text-xs text-gray-500">Register new customer</p>
+                </a>
+                <a class="btn p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors text-left group" asp-area="" asp-controller="MakeSales" asp-action="Create">
+                    <svg class="w-8 h-8 text-orange-600 mb-2 group-hover:scale-110 transition-transform" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                    </svg>
+                    <p class="font-medium text-gray-900">Make Sale</p>
+                    <p class="text-xs text-gray-500">Process book purchase</p>
+                </a>
+                <button class="p-4 bg-red-50 hover:bg-red-100 rounded-lg transition-colors text-left group">
+                    <svg class="w-8 h-8 text-red-600 mb-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                    <p class="font-medium text-gray-900">Low Stock</p>
+                    <p class="text-xs text-gray-500">Check inventory levels</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
