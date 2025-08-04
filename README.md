@@ -210,19 +210,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - No authentication/authorization implemented
 - Limited reporting features
 
-## 🔮 Future Enhancements
-
-- [ ] User authentication and role-based access
-- [ ] Advanced search and filtering
-- [ ] Book reservation system
-- [ ] Email notifications
-- [ ] Reporting dashboard
-- [ ] Book return tracking
-- [ ] Late fee calculation
 
 ## 📞 Contact
 
-**Your Name** - [your.email@example.com](mailto:your.email@example.com)
+**Your Name** - [omar.elsayed.m7@gmail.com](omar.elsayed.m7@gmail.com)
 
 Project Link: [https://github.com/OmarElsayed3/library-management-system](https://github.com/OmarElsayed3/library-management-system)
 
