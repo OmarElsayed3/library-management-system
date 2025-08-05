@@ -111,37 +111,6 @@ The application will be available at:
 - **HTTPS**: `https://localhost:5001`
 - **HTTP**: `http://localhost:5000`
 
-## 📂 Project Structure
-
-```
-LibraryManagementSystem/
-├── Controllers/           # MVC Controllers
-│   ├── BooksController.cs
-│   ├── CustomersController.cs
-│   ├── MakeSalesController.cs
-│   └── HomeController.cs
-├── Data/                  # Database Context
-│   └── ApplicationDbContext.cs
-├── Models/                # Data Models
-│   ├── Book.cs
-│   ├── Customer.cs
-│   ├── MakeSale.cs
-│   └── ErrorViewModel.cs
-├── Views/                 # Razor Views
-│   ├── Books/
-│   ├── Customers/
-│   ├── MakeSales/
-│   ├── Home/
-│   └── Shared/
-├── wwwroot/               # Static Files
-│   ├── css/
-│   ├── js/
-│   └── lib/
-├── Migrations/            # EF Core Migrations
-├── Properties/            # Launch Settings
-└── Program.cs             # Application Entry Point
-```
-
 ## 🎯 Usage
 
 ### Managing Books
@@ -173,22 +142,6 @@ The application uses SQL Server by default. To change the database provider:
 2. Install appropriate Entity Framework provider
 3. Update connection string format
 
-### TailwindCSS Configuration
-Customize the design by modifying `tailwind.config.js`:
-```javascript
-module.exports = {
-  content: [
-    './Views/**/*.cshtml',
-    './wwwroot/**/*.js'
-  ],
-  theme: {
-    extend: {
-      // Your customizations
-    },
-  },
-  plugins: [],
-}
-```
 
 ## 🤝 Contributing
 
@@ -200,9 +153,6 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🐛 Known Issues
 
@@ -210,12 +160,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - No authentication/authorization implemented
 - Limited reporting features
 
-
-## 📞 Contact
-
-**Your Name** - [omar.elsayed.m7@gmail.com](omar.elsayed.m7@gmail.com)
-
-Project Link: [https://github.com/OmarElsayed3/library-management-system](https://github.com/OmarElsayed3/library-management-system)
 
 ## 🙏 Acknowledgments
 
