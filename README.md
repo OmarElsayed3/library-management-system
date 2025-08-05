@@ -142,18 +142,6 @@ The application uses SQL Server by default. To change the database provider:
 2. Install appropriate Entity Framework provider
 3. Update connection string format
 
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
 ## 🐛 Known Issues
 
 - Database connection string is hardcoded (should be moved to configuration)
@@ -170,5 +158,3 @@ Contributions are welcome! Please follow these steps:
 - jQuery Validation
 
 ---
-
-⭐ **If you found this project helpful, please give it a star!** ⭐
