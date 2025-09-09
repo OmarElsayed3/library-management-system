@@ -43,12 +43,6 @@ A comprehensive web-based Library Management System built with ASP.NET Core, des
 - **JavaScript**: Vanilla JS with jQuery
 - **Validation**: jQuery Validation & Unobtrusive Validation
 
-### Development Tools
-- **IDE**: Visual Studio / VS Code
-- **Package Manager**: NuGet, npm
-- **Version Control**: Git
-- **Build Tool**: .NET CLI
-
 ## 📋 Prerequisites
 
 Before running this application, make sure you have the following installed:
@@ -133,28 +127,11 @@ The application will be available at:
 4. Record quantities and calculate totals
 5. View sales history and reports
 
-## 🔧 Configuration
-
-### Database Configuration
-The application uses SQL Server by default. To change the database provider:
-
-1. Update `ApplicationDbContext.cs`
-2. Install appropriate Entity Framework provider
-3. Update connection string format
 
 ## 🐛 Known Issues
 
 - Database connection string is hardcoded (should be moved to configuration)
 - No authentication/authorization implemented
 - Limited reporting features
-
-
-## 🙏 Acknowledgments
-
-- ASP.NET Core Documentation
-- Entity Framework Core Documentation
-- TailwindCSS Documentation
-- Bootstrap Icons
-- jQuery Validation
 
 ---
